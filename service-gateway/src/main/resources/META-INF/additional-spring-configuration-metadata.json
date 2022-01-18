@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "eureka.instance.management.endpoints.web.exposure.include",
+      "type": "java.lang.String",
+      "description": "Description for eureka.instance.management.endpoints.web.exposure.include."
+  }
+] }

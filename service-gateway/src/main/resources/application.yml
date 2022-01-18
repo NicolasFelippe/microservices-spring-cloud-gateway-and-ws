@@ -1,0 +1,38 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          'http://localhost:5500':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      register-with-eureka: true
+  instance:
+    preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "gateway"
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
