@@ -2,13 +2,11 @@ spring:
   application:
     name: service-websocket
 server:
-  port: 8085
+  port: ${PORT:0}
 
-cors:
-  allowed-origins: "*"
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
   instance:
-    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

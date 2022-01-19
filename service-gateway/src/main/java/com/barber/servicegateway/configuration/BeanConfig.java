@@ -26,7 +26,7 @@ public class BeanConfig {
                         .uri("lb://SERVICE-TEST/"))
 
                 .route("serviceWebsocket",r -> r.path("/greeting/**")
-//                        .filters(f ->  f.rewritePath("/websocket/(?<remains>.*)", "/${remains}"))
+//                        .filters(f ->  f.rewritePath("/greeting/(?<remains>.*)", "/${remains}"))
                         .uri("lb://SERVICE-WEBSOCKET/"))
                 .build();
     }
