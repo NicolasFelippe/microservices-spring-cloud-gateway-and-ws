@@ -2,16 +2,16 @@ server:
   port: 8080
 spring:
   cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "*"
-            allowedMethods:
-              - GET
-              - POST
-              - DELETE
-              - PUT
+#    gateway:
+#      default-filters:
+#        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+#      globalcors:
+#        corsConfigurations:
+#          '[/**]':
+#            allowedOrigins: "*"
+#            allowedMethods: "*"
+#            allowedHeaders: "*"
+#            allowCredentials: "true"
   application:
     name: api-gateway
 
@@ -26,13 +26,6 @@ eureka:
 management:
   endpoints:
     web:
-      cors:
-        allowed-origins: "http://localhost:5500"
-        allowedMethods:
-          - GET
-          - POST
-          - PUT
-          - DELETE
       exposure:
         include: "gateway"
 

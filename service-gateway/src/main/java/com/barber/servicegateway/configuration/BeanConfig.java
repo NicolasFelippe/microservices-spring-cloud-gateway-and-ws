@@ -19,14 +19,11 @@ public class BeanConfig {
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("serviceTest", r -> r.path("/service-test/**")
-                        .filters(f -> f
-                                .addRequestHeader("X-first-Header", "first-service-header")
-                                .circuitBreaker(c -> c.setName("serviceTest")
-                                        .setFallbackUri("forward:/fallback/first")))
+                        .filters(f -> f.circuitBreaker(c -> c.setName("serviceTest")
+                                       .setFallbackUri("forward:/fallback/first")))
                         .uri("lb://SERVICE-TEST/"))
 
                 .route("serviceWebsocket",r -> r.path("/greeting/**")
-//                        .filters(f ->  f.rewritePath("/greeting/(?<remains>.*)", "/${remains}"))
                         .uri("lb://SERVICE-WEBSOCKET/"))
                 .build();
     }

@@ -1,6 +1,9 @@
 spring:
   application:
     name: service-websocket
+  redis:
+    host: localhost
+    port: 6379
 server:
   port: ${PORT:0}
 
