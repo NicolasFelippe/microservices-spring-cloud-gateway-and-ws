@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hello WebSocket</title>
+<script src="jquery-2.1.4.min.js"></script>
+<script src="sockjs-0.3.4.min.js"></script>
+<script src="stomp.js"></script>
+
+<script type="text/javascript">
+	var stompClient = null;
+
+	function setConnected(connected) {
+		document.getElementById('connect').disabled = connected;
+		document.getElementById('disconnect').disabled = !connected;
+	}
+
+	function connect() {
+		var socket = new SockJS('http://localhost:8080/websocket');
+		stompClient = Stomp.over(socket);
+		stompClient.connect({}, function(frame) {
+			setConnected(true);
+			console.log('Connected: ' + frame);
+			stompClient.subscribe('/topic/messages', function(data) {
+				showMessage(JSON.parse(data.body));
+			});
+		});
+	}
+
+	function disconnect() {
+		if (stompClient != null) {
+			stompClient.disconnect();
+		}
+		setConnected(false);
+		console.log("Disconnected");
+	}
+
+	function broadcastMessageViaSocket() {
+		var message = $('#message').val();
+		stompClient.send("/app/broadcast", {}, JSON.stringify({
+			'content' : message,
+			'type' : 'INFO'
+		}));
+	}
+
+	function broadcastMessage() {
+		var message = $('#message').val();
+
+		$.ajax({
+			url : 'http://localhost:8080/api/message',
+			type : "POST",
+			data : JSON.stringify({
+				'content' : message,
+				'type' : 'INFO'
+			}),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : function() {
+				console.log("success");
+			}
+		})
+	}
+
+	function showMessage(message) {
+		var builtMessage = buildMessageString(message);
+		$('#messages').append('<p>' + builtMessage + '</p>');
+	}
+
+	function showMessages(messageArray) {
+		$.each(messageArray, function(index, value) {
+			showMessage(value);
+		})
+	}
+
+	function buildMessageString(message) {
+		const date = new Date(message.date)
+		return `Server: ${message.portServer} [${message.type}] - ${message.sender} Says: ${message.content} (${date.toLocaleString()})`;
+	}
+
+	function findAll() {
+		$('#messages').empty();
+		$.get('http://localhost:8080/api/message', function(data) {
+			showMessages(data);
+		});
+	}
+</script>
+<script>
+	$(document).ready(findAll);
+</script>
+</head>
+<body onload="disconnect();connect();">
+	<noscript>
+		<h2 style="color: #ff0000">Seems your browser doesn't support
+			Javascript! Websocket relies on Javascript being enabled. Please
+			enable Javascript and reload this page!</h2>
+	</noscript>
+
+	<div>
+		<h2>Websocket and Redis demo</h2>
+		<div>
+			<div>WebSocket connection</div>
+			<button id="connect" onclick="connect();">Connect</button>
+			<button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
+		</div>
+		<div id="conversationDiv">
+			<p>
+				<label>Broadcast message: </label><input type="text" id="message" />
+				<button id="broadcastMessage" onclick="broadcastMessageViaSocket();">Send</button>
+			</p>
+			<p>
+				<button id="findAll" onclick="findAll();">Refresh</button>
+			</p>
+			<div id="messages"></div>
+		</div>
+	</div>
+
+</body>
+</html>
