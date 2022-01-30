@@ -6,7 +6,7 @@ import com.barber.servicewebsocket.domain.model.MessageType;
 /**
  * POJO which models messages on the REST layer
  *
- * @author  Nicolas Felippe
+ * @author Nicolas Felippe
  */
 public class BasicMessage {
 

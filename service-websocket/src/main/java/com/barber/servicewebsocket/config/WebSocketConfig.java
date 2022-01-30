@@ -11,11 +11,9 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    // TODO not suitable for clustering
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         registry.enableSimpleBroker("/topic");
-//        registry.enableStompBrokerRelay("/topic")
         registry.setApplicationDestinationPrefixes("/app");
     }
 
@@ -26,12 +24,5 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .withSockJS()
                 .setInterceptors(new HttpSessionHandshakeInterceptor());
     }
-
-//    @Override
-//    public void registerStompEndpoints(StompEndpointRegistry registry) {
-//        registry.addEndpoint("/greeting")
-//                .setAllowedOriginPatterns("*")
-//                .withSockJS();
-//    }
 
 }

@@ -2,10 +2,10 @@ package com.barber.servicewebsocket.domain.model;
 
 import com.barber.servicewebsocket.web.model.BasicMessage;
 
-import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 
 public class Message extends BasicMessage {
 

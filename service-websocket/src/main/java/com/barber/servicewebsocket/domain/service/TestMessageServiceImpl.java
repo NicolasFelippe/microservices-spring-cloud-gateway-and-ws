@@ -19,7 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
  * Basic in-memory {@link MessageService} implementation, which also implements {@link MessageEventPublisher} interface. Handy for testing or when Redis is not available.
  * Can be activated with spring profile "embedded"
  *
- * @author  Nicolas Felippe
+ * @author Nicolas Felippe
  */
 @Service
 @Profile("embedded")

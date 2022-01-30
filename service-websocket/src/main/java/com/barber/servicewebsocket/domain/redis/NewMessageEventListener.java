@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 /**
  * Redis message listener which subscribes on "newMessages" channel. On a received messages it saves the message through {@link MessageService}
  *
- * @author  Nicolas Felippe
+ * @author Nicolas Felippe
  */
 @Component
 public class NewMessageEventListener {

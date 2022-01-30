@@ -12,8 +12,7 @@ import org.springframework.stereotype.Component;
 /**
  * Redis message listener which subscribes on "newMessages" channel and broadcasts the received {@link Message} object on Websocket.
  *
- * @author  Nicolas Felippe
- *
+ * @author Nicolas Felippe
  */
 @Component
 public class NewMessageBroadcaster {
@@ -24,8 +23,11 @@ public class NewMessageBroadcaster {
 
     private static final Logger logger = LoggerFactory.getLogger(NewMessageBroadcaster.class);
 
-    @Autowired
     private SimpMessagingTemplate brokerMessagingTemplate;
+
+    public NewMessageBroadcaster(SimpMessagingTemplate brokerMessagingTemplate) {
+        this.brokerMessagingTemplate = brokerMessagingTemplate;
+    }
 
     public void handleMessage(Message message, String channel) {
 
