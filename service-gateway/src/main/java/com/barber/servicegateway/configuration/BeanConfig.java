@@ -23,7 +23,9 @@ public class BeanConfig {
                                        .setFallbackUri("forward:/fallback/first")))
                         .uri("lb://SERVICE-TEST/"))
 
-                .route("serviceWebsocket",r -> r.path("/greeting/**")
+                .route("serviceWebsocket",r -> r.path("/websocket/**")
+                        .uri("lb://SERVICE-WEBSOCKET/"))
+                .route("serviceWebsocketAPI",r -> r.path("/api/**")
                         .uri("lb://SERVICE-WEBSOCKET/"))
                 .build();
     }
