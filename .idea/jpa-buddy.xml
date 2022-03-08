@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpaBuddyIdeaProjectConfig" ddlActionDbType="maria" isDiffGenerationLicenceAccepted="true">
+    <option name="flywayDirectory" value="db\migration" />
+    <option name="defaultUnitInitialized" value="true" />
+    <option name="sourceModelValue" value="Default" />
+    <option name="targetDbValue" value="1e4b6e68-0c22-40a7-9b4e-b69d9c5ee1ad" />
+    <option name="isSnapshotDb" value="false" />
+    <option name="snapshotModelValue" value="Default" />
+  </component>
+</project>

@@ -12,4 +12,14 @@ public class GatewayController {
     public String defaultMessage(){
         return "Houve algum erro ao conectar. Por favor, tente novamente mais tarde.";
     }
+
+    @GetMapping("/fb-user")
+    public String userFallback() {
+        return "User service is not available";
+    }
+
+    @GetMapping("/fb-auth")
+    public String authFallback() {
+        return "Auth service is not available";
+    }
 }

@@ -1,7 +1,7 @@
 server:
   port: 8080
 spring:
-  cloud:
+#  cloud:
 #    gateway:
 #      default-filters:
 #        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
@@ -14,7 +14,8 @@ spring:
 #            allowCredentials: "true"
   application:
     name: api-gateway
-
+jwt:
+  secret: BvPHGM8C0ia4uOuxxqPD5DTbWC9F9TWvPStp3pb7ARo0oK2mJ3pd3YG4lxA9i8bj6OTbadwezxgeEByY
 eureka:
   client:
     serviceUrl:

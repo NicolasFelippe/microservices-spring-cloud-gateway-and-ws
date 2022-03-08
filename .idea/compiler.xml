@@ -2,23 +2,30 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microservices-barbearia" />
         <module name="service-gateway" />
+        <module name="service-user" />
+        <module name="service-auth" />
         <module name="service-discovery" />
         <module name="service-websocket" />
-        <module name="service-test" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="service-test" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="service-auth" options="-parameters" />
       <module name="service-discovery" options="-parameters" />
       <module name="service-gateway" options="-parameters" />
       <module name="service-test" options="-parameters" />
+      <module name="service-user" options="-parameters" />
       <module name="service-websocket" options="-parameters" />
     </option>
   </component>

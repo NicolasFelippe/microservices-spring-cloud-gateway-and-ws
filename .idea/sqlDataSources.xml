@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="78ae1efa-e56d-412e-80da-127b24a7656e" name="DDL ms_users">
+      <data-sources db="1e4b6e68-0c22-40a7-9b4e-b69d9c5ee1ad" ddl="d94218ec-1f03-4362-9598-e31393d604ab" />
+      <scope>
+        <node negative="1">
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+          <node kind="schema" qname="barber_ms_users" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="d94218ec-1f03-4362-9598-e31393d604ab" />
+          <option name="name" value="barber_ms_users@localhost (DDL)" />
+          <option name="languageId" value="MariaDB" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/service-user/src/main/resources/db/migration" />
+            </array>
+          </option>
+          <option name="scriptOptions">
+            <map>
+              <entry key="QualifyWithSchema" value="ALWAYS" />
+            </map>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

@@ -8,11 +8,15 @@
         <option value="$PROJECT_DIR$/service-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/service-websocket/pom.xml" />
         <option value="$PROJECT_DIR$/service-discovery/pom.xml" />
-        <option value="$PROJECT_DIR$/service-test/pom.xml" />
+        <option value="$PROJECT_DIR$/service-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/service-user/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="openjdk-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
   </component>
 </project>
