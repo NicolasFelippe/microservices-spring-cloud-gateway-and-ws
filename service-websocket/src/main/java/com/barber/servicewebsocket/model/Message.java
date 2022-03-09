@@ -1,4 +1,4 @@
-package com.barber.servicewebsocket.domain.model;
+package com.barber.servicewebsocket.model;
 
 import com.barber.servicewebsocket.web.model.BasicMessage;
 
@@ -19,7 +19,7 @@ public class Message extends BasicMessage {
 
     }
 
-    private Message(String content, MessageType type, String sender) {
+    private Message(String content, String type, String sender) {
         super(content, type);
         this.sender = sender;
         date = LocalDateTime.now();
@@ -40,7 +40,7 @@ public class Message extends BasicMessage {
 
     public static class MessageBuilder {
 
-        private Message message;
+        private final Message message;
 
         private MessageBuilder(Message message) {
             this.message = message;
@@ -51,7 +51,7 @@ public class Message extends BasicMessage {
             return this;
         }
 
-        public MessageBuilder withType(MessageType type) {
+        public MessageBuilder withType(String type) {
             message.setType(type);
             return this;
         }
@@ -85,7 +85,7 @@ public class Message extends BasicMessage {
         public static MessageBuilder randomInfo() {
             Message newMessage = new Message();
             newMessage.setContent(randomAlphabetic(200));
-            newMessage.setType(MessageType.INFO);
+            newMessage.setType(MessageType.INFO.toString());
             newMessage.sender = randomAlphabetic(20);
 
             return new MessageBuilder(newMessage);
