@@ -40,6 +40,7 @@ public class WebSocketChatController {
         BasicMessage webSocketChatMessage = new BasicMessage(payload, "CHAT");
         webSocketChatMessage.setPortServer(env.getProperty("local.server.port"));
         webSocketChatMessage.setSender(pingPong.getUsername());
+        brokerMessagingTemplate.convertAndSend("/topic/public", webSocketChatMessage);
         return webSocketChatMessage;
     }
 

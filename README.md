@@ -45,7 +45,7 @@ mvnw clean package -DskipTests
 
 docker build -t service-discovery:v1 .
 
-docker run -p 8761:8761 --name service-discovery --network barber-net service-discovery:v1
+docker run --detach -p 8761:8761 --name service-discovery --network barber-net service-discovery:v1
 ```
 
 ## service-gateway

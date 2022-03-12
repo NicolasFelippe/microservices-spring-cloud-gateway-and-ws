@@ -29,15 +29,15 @@ public class Routes {
 //                                       .setFallbackUri("forward:/fallback/first")))
 //                        .uri("lb://SERVICE-TEST/"))
 
-//                .route("serviceWebsocket",r -> r
-//                        .path("/websocket/**")
+                .route("serviceWebsocket",r -> r
+                        .path("/gs-rpa/**")
 //                        .filters(f -> f.filter(filter))
-//                        .uri("lb://SERVICE-WEBSOCKET/"))
-//
-//                .route("serviceWebsocketAPI",r -> r
-//                        .path("/api/**")
+                        .uri("lb://SERVICE-WEBSOCKET/"))
+
+                .route("serviceWebsocketAPI",r -> r
+                        .path("/api/**")
 //                        .filters(f -> f.filter(filter))
-//                        .uri("lb://SERVICE-WEBSOCKET/"))
+                        .uri("lb://SERVICE-WEBSOCKET/"))
 
                 .route("service-user", r -> r
                         .path("/users/**")

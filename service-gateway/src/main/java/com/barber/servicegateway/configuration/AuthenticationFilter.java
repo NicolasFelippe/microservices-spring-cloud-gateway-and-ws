@@ -6,12 +6,15 @@ import io.jsonwebtoken.JwtException;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.nio.charset.StandardCharsets;
 
 @RefreshScope
 @Component
@@ -31,33 +34,35 @@ public class AuthenticationFilter implements GatewayFilter {
 
         if (routerValidator.isSecured.test(request)) {
             if (this.isAuthMissing(request))
-                return this.onError(exchange, "Authorization header is missing in request", HttpStatus.UNAUTHORIZED);
+                return this.onError(exchange, "Authorization header is missing in request");
 
             final String token = this.getAuthHeader(request);
-
-            if (jwtUtil.isInvalid(token))
-                return this.onError(exchange, "Authorization header is invalid", HttpStatus.UNAUTHORIZED);
+            try {
+                if (jwtUtil.isInvalid(token))
+                    return this.onError(exchange, "Authorization header is invalid");
+            } catch (JwtException ex) {
+                return this.onError(exchange, "Authorization header is invalid");
+            }
 
             this.populateRequestWithHeaders(exchange, token);
         }
         return chain.filter(exchange);
     }
 
-
-    /*PRIVATE*/
-
-    private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+    private Mono<Void> onError(ServerWebExchange exchange, String err) {
         ServerHttpResponse response = exchange.getResponse();
-        response.setStatusCode(httpStatus);
-        return response.setComplete();
+        byte[] bytes = err.getBytes(StandardCharsets.UTF_8);
+        DataBuffer buffer = response.bufferFactory().wrap(bytes);
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        return response.writeWith(Mono.just(buffer));
     }
 
     private String getAuthHeader(ServerHttpRequest request) {
-        String authorization =  request
+        String authorization = request
                 .getHeaders()
                 .getOrEmpty("Authorization")
                 .get(0);
-        if(authorization == null || authorization.equals("")){
+        if (authorization == null || authorization.equals("")) {
             return null;
         }
         return authorization.split(" ")[1];

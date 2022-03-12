@@ -1,5 +1,6 @@
 package com.barber.serviceauth.services;
 
+import com.barber.serviceauth.entities.enums.TypeTokenEnum;
 import com.barber.serviceauth.entities.vo.UserVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -44,16 +45,16 @@ public class JwtUtil {
         return expiration.before(new Date());
     }
 
-    public String generate(UserVO userVO, String type) {
+    public String generate(UserVO userVO, TypeTokenEnum type) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", userVO.getId());
         claims.put("role", userVO.getRole());
         return doGenerateToken(claims, userVO.getEmail(), type);
     }
 
-    private String doGenerateToken(Map<String, Object> claims, String username, String type) {
+    private String doGenerateToken(Map<String, Object> claims, String username, TypeTokenEnum type) {
         long expirationTimeLong;
-        if ("ACCESS".equals(type)) {
+        if (type.equals(TypeTokenEnum.ACCESS)) {
             expirationTimeLong = Long.parseLong(expirationTime) * 1000;
         } else {
             expirationTimeLong = Long.parseLong(expirationTime) * 1000 * 5;

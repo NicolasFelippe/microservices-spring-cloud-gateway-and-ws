@@ -16,7 +16,7 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://mariadb:3306/barber_ms_users
+    url: jdbc:mariadb://localhost:3306/barber_ms_users
     username: root
     password: root
 server:
@@ -24,6 +24,6 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://service-discovery:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
